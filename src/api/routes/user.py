@@ -8,6 +8,7 @@ from src.api.schemas.request import ListPaginatedItemsRequest
 from src.api.schemas.request.user import CreateUserRequest, LoginRequest
 from src.api.meta.user import list_users_meta
 
+
 class UserRouter:
     router = APIRouter(prefix="/user", tags=["User"])
 
@@ -18,7 +19,7 @@ class UserRouter:
         service: Annotated[
             QFieldCloudService, Depends(Provide[Container.qfieldcloud_service])
         ],
-    payload: Annotated[ListPaginatedItemsRequest, Depends()],
+        payload: Annotated[ListPaginatedItemsRequest, Depends()],
     ):
         return service.list_users(payload)
 

@@ -3,6 +3,7 @@ from typing import Generic, TypeVar
 
 T = TypeVar("T")
 
+
 class PageMetaDto(BaseModel):
     count: int
     next: str | None = None

@@ -7,6 +7,7 @@ from src.domain.services.qfieldcloud import QFieldCloudService
 from src.api.schemas.request.project import CreateProjectRequest
 from src.api.meta.project import create_project_meta
 
+
 class ProjectRouter:
     router = APIRouter(prefix="/project", tags=["Project"])
 
@@ -19,7 +20,7 @@ class ProjectRouter:
         ],
     ):
         return service.list_projects()
-    
+
     @staticmethod
     @router.get("/{project_id}/collaborators/")
     @inject
@@ -29,9 +30,8 @@ class ProjectRouter:
             QFieldCloudService, Depends(Provide[Container.qfieldcloud_service])
         ],
     ):
-        return service.get_project_collaborators(project_id=project_id)    
-        
-    
+        return service.get_project_collaborators(project_id=project_id)
+
     @staticmethod
     @router.post("/", **create_project_meta())
     @inject

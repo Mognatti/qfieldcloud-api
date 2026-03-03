@@ -1,5 +1,5 @@
-
 from pydantic import BaseModel, ConfigDict
+
 
 class User(BaseModel):
     username: str
@@ -9,4 +9,3 @@ class User(BaseModel):
     avatar_url: str | None = None
 
     model_config = ConfigDict(from_attributes=True)
-

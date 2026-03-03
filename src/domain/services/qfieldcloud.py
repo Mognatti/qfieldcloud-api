@@ -9,6 +9,7 @@ from src.api.schemas.response import ListPaginatedItems, PageMetaDto
 
 from src.api.schemas.request import ListPaginatedItemsRequest
 
+
 class QFieldCloudService:
     def __init__(self):
         self.url = settings.QFIELDCLOUD_URL
@@ -24,7 +25,7 @@ class QFieldCloudService:
 
     def get_project(self, project_id: str):
         return self._client.get_project(project_id)
-    
+
     def create_project(self, payload: CreateProjectRequest):
         project = self._client.create_project(
             name=payload.name,
@@ -38,10 +39,10 @@ class QFieldCloudService:
             role="admin",
         )
         return project
-    
+
     def get_project_collaborators(self, project_id: str):
         return self._client.get_project_collaborators(project_id=project_id)
-    
+
     def upload_files(self, project_id: str, local_directory: str):
         return self._client.upload_files(
             project_id=project_id,
@@ -58,8 +59,10 @@ class QFieldCloudService:
     ###### USERS #######
     ####################
 
-    def list_users(self, payload: ListPaginatedItemsRequest) -> ListPaginatedItems[User]:        
-        
+    def list_users(
+        self, payload: ListPaginatedItemsRequest
+    ) -> ListPaginatedItems[User]:
+
         response = self._client.session.get(
             f"{self.url}users/",
             headers={"Authorization": f"Token {self.token}"},
@@ -67,14 +70,16 @@ class QFieldCloudService:
             verify=False,
         )
 
-        result =  {
+        result = {
             "data": response.json(),
             "count": int(response.headers.get("X-Total-Count", 0)),
             "next": response.headers.get("X-Next-Page"),
             "previous": response.headers.get("X-Previous-Page"),
         }
 
-        return ListPaginatedItems(data=[User(**user) for user in result["data"]], meta=PageMetaDto(**result))
+        return ListPaginatedItems(
+            data=[User(**user) for user in result["data"]], meta=PageMetaDto(**result)
+        )
 
     def create_user(self, payload: CreateUserRequest):
         url = f"{self.url}admin/users/"
