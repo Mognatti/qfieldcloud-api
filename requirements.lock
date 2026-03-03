@@ -20,7 +20,13 @@ anyio==4.12.1
 certifi==2026.1.4
     # via httpcore
     # via httpx
+    # via qfieldcloud-sdk
+    # via requests
+charset-normalizer==3.4.4
+    # via qfieldcloud-sdk
+    # via requests
 click==8.3.1
+    # via qfieldcloud-sdk
     # via uvicorn
 colorlog==6.10.1
     # via qfieldcloud
@@ -41,10 +47,14 @@ httpx==0.28.1
 idna==3.11
     # via anyio
     # via httpx
+    # via qfieldcloud-sdk
+    # via requests
 iniconfig==2.3.0
     # via pytest
 packaging==26.0
     # via pytest
+pathvalidate==3.3.1
+    # via qfieldcloud-sdk
 pluggy==1.6.0
     # via pytest
 psutil==5.9.8
@@ -65,16 +75,31 @@ python-dotenv==1.2.1
     # via pydantic-settings
 pyyaml==6.0.3
     # via qfieldcloud
+qfieldcloud-sdk==0.12.0
+    # via qfieldcloud
+requests==2.32.5
+    # via qfieldcloud-sdk
+    # via requests-toolbelt
+requests-toolbelt==1.0.0
+    # via qfieldcloud-sdk
 starlette==0.52.1
     # via fastapi
+tqdm==4.67.3
+    # via qfieldcloud-sdk
 typing-extensions==4.15.0
+    # via anyio
+    # via dependency-injector
     # via fastapi
     # via pydantic
     # via pydantic-core
+    # via starlette
     # via typing-inspection
 typing-inspection==0.4.2
     # via fastapi
     # via pydantic
     # via pydantic-settings
+urllib3==2.6.3
+    # via qfieldcloud-sdk
+    # via requests
 uvicorn==0.41.0
     # via qfieldcloud

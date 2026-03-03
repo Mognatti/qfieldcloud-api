@@ -1,13 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.config.dependency import Dependency
+from src.config.dependency import Container
 
 from src.api.routes.health import HealthRouter
+from src.api.routes.project import ProjectRouter
+from src.api.routes.auth import AuthRouter
+from src.api.routes.user import UserRouter
 
 
 def create_app() -> FastAPI:
-    Dependency()
+    Container()
 
     app = FastAPI(
         title="QFieldCloud - API",
@@ -22,7 +25,7 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
-    routers = [HealthRouter]
+    routers = [HealthRouter, ProjectRouter, AuthRouter, UserRouter]
 
     for router in routers:
         app.include_router(router.router)

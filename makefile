@@ -1,3 +1,3 @@
 run:
-	@echo "Running qfieldcloud"
+	@echo "Running qfieldcloud-api"
 	rye run python main.py
