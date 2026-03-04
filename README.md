@@ -71,6 +71,35 @@ Colaborador admin pode:
 - Disparar jobs de repackaging
 - Editar metadados do projeto
 
+## Storage
+
+Para a instância local do QFieldCloud é importante confirmar que o Minio está sendo acessado pelo docker.
+As variáveis de ambiente da instânica definem a conexão e é imporante alterar onde ela cria o objeto STORAGES
+para que fique dessa forma:
+
+```bash
+STORAGES='{
+        "default": {
+            "BACKEND": "qfieldcloud.filestorage.backend.QfcS3Boto3Storage",
+            "OPTIONS": {
+                "access_key": "minioadmin",
+                "secret_key": "minioadmin",
+                "bucket_name": "qfieldcloud-local",
+                "region_name": "",
+                "endpoint_url": "http://minio:9000" # Mudar aqui, o valor padrão é diferente e o upload de arquivos falha
+            },
+            "QFC_IS_LEGACY": false
+        }
+    }'
+```
+
+Depois disso, podemos criar o bucket no Minio, caso ainda não o tenha feito. para receber os arquivos:
+
+```bash
+docker compose exec minio mc alias set local http://localhost:9000 minioadmin minioadmin
+docker compose exec minio mc mb local/qfieldcloud-local
+```
+
 ### Links úteis
 
 - SDK docs: https://opengisch.github.io/qfieldcloud-sdk-python/

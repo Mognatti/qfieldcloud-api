@@ -19,9 +19,9 @@ class UserRouter:
         service: Annotated[
             QFieldCloudService, Depends(Provide[Container.qfieldcloud_service])
         ],
-        payload: Annotated[ListPaginatedItemsRequest, Depends()],
+        params: Annotated[ListPaginatedItemsRequest, Depends()],
     ):
-        return service.list_users(payload)
+        return service.list_users(params)
 
     @staticmethod
     @router.post("/")

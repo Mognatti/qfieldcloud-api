@@ -73,6 +73,8 @@ pytest==9.0.2
     # via qfieldcloud
 python-dotenv==1.2.1
     # via pydantic-settings
+python-multipart==0.0.22
+    # via qfieldcloud
 pyyaml==6.0.3
     # via qfieldcloud
 qfieldcloud-sdk==0.12.0
